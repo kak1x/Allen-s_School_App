@@ -15,6 +15,7 @@
 		1642DBFD293590A50020AFA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1642DBFB293590A50020AFA1 /* LaunchScreen.storyboard */; };
 		1642DC05293598C80020AFA1 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1642DC04293598C80020AFA1 /* SecondViewController.swift */; };
 		16E0A206293674DD00C161BD /* BMICalculatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E0A205293674DD00C161BD /* BMICalculatorManager.swift */; };
+		16E0A20829367CFD00C161BD /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E0A20729367CFD00C161BD /* BMI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		1642DBFE293590A50020AFA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1642DC04293598C80020AFA1 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		16E0A205293674DD00C161BD /* BMICalculatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMICalculatorManager.swift; sourceTree = "<group>"; };
+		16E0A20729367CFD00C161BD /* BMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		16E0A2022936746200C161BD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				16E0A20729367CFD00C161BD /* BMI.swift */,
 				16E0A205293674DD00C161BD /* BMICalculatorManager.swift */,
 			);
 			path = Models;
@@ -172,6 +175,7 @@
 				1642DBF5293590A40020AFA1 /* ViewController.swift in Sources */,
 				1642DBF1293590A40020AFA1 /* AppDelegate.swift in Sources */,
 				16E0A206293674DD00C161BD /* BMICalculatorManager.swift in Sources */,
+				16E0A20829367CFD00C161BD /* BMI.swift in Sources */,
 				1642DBF3293590A40020AFA1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
