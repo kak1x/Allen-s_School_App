@@ -28,8 +28,17 @@ class ViewController: UIViewController {
         
         movieDataManager.makeMovieData()
 //        moviesArray = movieDataManager.getMovieData()
+        
+        title = "영화목록"
     }
 
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        
+        movieDataManager.updateMovieData()
+        
+        tableView.reloadData() // ⭐️ 테이블뷰를 다시 불러오는 메서드 (숫자가 늘어났으므로 반드시 호출) ⭐️
+        
+    }
 }
 
                 // ⭐️ 테이블뷰를 사용하기 위해선 프로토콜 채택 필수! ⭐️
