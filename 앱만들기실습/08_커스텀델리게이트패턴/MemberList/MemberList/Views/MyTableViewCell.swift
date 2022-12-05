@@ -7,8 +7,18 @@
 
 import UIKit
 
-class MyTableViewCell: UITableViewCell {
+final class MyTableViewCell: UITableViewCell {
     
+    var member: Member? {
+        didSet { // 저장속성 member가 변할때마다(member를 전달만 받으면) didSet 실행될 것
+            guard var member = member else { return }
+            mainImageView.image = member.memberImage
+            memberNameLabel.text = member.name
+            addressLabel.text = member.address
+        }
+    }
+    
+    // MARK: - UI 구현
     let mainImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
