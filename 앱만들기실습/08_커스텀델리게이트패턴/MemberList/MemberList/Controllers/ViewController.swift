@@ -28,10 +28,10 @@ final class ViewController: UIViewController {
         setupTableViewConstraints()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        tableView.reloadData()
+//    }
     
     func setupNaviBar() {
         title = "회원 목록"
@@ -120,6 +120,7 @@ extension ViewController: UITableViewDelegate {
         
         // 다음화면으로 넘어가는 코드
         let detailVC = DetailViewController()
+        detailVC.delegate = self // DetatilVC 의 대리자를 VC로 설정
         
         let array = memberListManager.getMembersList()
         detailVC.member = array[indexPath.row]
@@ -127,5 +128,20 @@ extension ViewController: UITableViewDelegate {
         navigationController?.pushViewController(detailVC, animated: true)
         
     }
+    
+}
+
+extension ViewController: MemberDelegate {
+    
+    func addNewMember(_ member: Member) {
+        memberListManager.makeNewMember(member)
+        tableView.reloadData()
+    }
+    
+    func update(index: Int, _ member: Member) {
+        memberListManager.updateMemberInfo(index: index, member)
+        tableView.reloadData()
+    }
+    
     
 }

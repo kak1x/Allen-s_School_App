@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol MemberDelegate: AnyObject { // 커스텀 프로토콜 -> weak 선언은 클래스에서만 가능 -> 클래스에서만 채택 가능하게 AnyObject 상속
+    func addNewMember(_ member: Member)
+    func update(index: Int, _ member: Member)
+}
+
+
+
 struct Member {
     
     lazy var memberImage: UIImage? = {

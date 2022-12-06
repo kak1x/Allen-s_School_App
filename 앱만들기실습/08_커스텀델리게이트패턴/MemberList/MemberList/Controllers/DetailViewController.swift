@@ -12,6 +12,9 @@ final class DetailViewController: UIViewController {
 
     private let detailView = DetailView()
     
+    weak var delegate: MemberDelegate? // MemberDelegate를 채택한 타입이 대리자가 될 수 있다
+    // 서로 가리키기에 강한 순환 참조 발생 가능 -> weak 으로 방지
+    
     var member: Member?
     
     override func loadView() { // 뷰디드로드보다 먼저 호출되는 로드뷰를 통해 뷰 교체
@@ -80,14 +83,14 @@ final class DetailViewController: UIViewController {
             newMember.memberImage = detailView.mainImageView.image
             
             // 1) 델리게이트 방식이 아닌 구현⭐️
-            let index = navigationController!.viewControllers.count - 2
-            // 전 화면에 접근하기 위함
-            let vc = navigationController?.viewControllers[index] as! ViewController
-            // 전 화면의 모델에 접근해서 멤버를 추가
-            vc.memberListManager.makeNewMember(newMember)
+//            let index = navigationController!.viewControllers.count - 2
+//            // 전 화면에 접근하기 위함
+//            let vc = navigationController?.viewControllers[index] as! ViewController
+//            // 전 화면의 모델에 접근해서 멤버를 추가
+//            vc.memberListManager.makeNewMember(newMember)
             
-            // 2) 델리게이트 방식으로 구현⭐️
-            //delegate?.addNewMember(newMember)
+            // 2) 델리게이트 방식으로 구현⭐️ -> 커스텀 프로토콜 이용 -> 대리자 = VC
+            delegate?.addNewMember(newMember)
             
             // [2] 멤버가 있다면 (멤버의 내용을 업데이트 하기 위한 설정)
         } else {
@@ -104,14 +107,14 @@ final class DetailViewController: UIViewController {
             detailView.member = member
             
             // 1) 델리게이트 방식이 아닌 구현 ⭐️
-            let index = navigationController!.viewControllers.count - 2 // count = 2 (뷰컨, 디테일뷰컨), index = 0 이 뷰컨
-            // 전 화면에 접근하기 위함
-            let vc = navigationController?.viewControllers[index] as! ViewController
-            // 전 화면의 모델에 접근해서 멤버를 업데이트
-            vc.memberListManager.updateMemberInfo(index: memberId, member!)
-            
-            // 2) 델리게이트 방식으로 구현 ⭐️
-//            delegate?.update(index: memberId, member!)
+//            let index = navigationController!.viewControllers.count - 2 // count = 2 (뷰컨, 디테일뷰컨), index = 0 이 뷰컨
+//            // 전 화면에 접근하기 위함
+//            let vc = navigationController?.viewControllers[index] as! ViewController
+//            // 전 화면의 모델에 접근해서 멤버를 업데이트
+//            vc.memberListManager.updateMemberInfo(index: memberId, member!)
+//
+            // 2) 델리게이트 방식으로 구현 ⭐️ -> 커스텀 프로토콜 이용 -> 대리자 = VC
+            delegate?.update(index: memberId, member!)
         }
         // 작업이 끝난 이후에 이전 화면으로 돌아가기
         self.navigationController?.popViewController(animated: true)
