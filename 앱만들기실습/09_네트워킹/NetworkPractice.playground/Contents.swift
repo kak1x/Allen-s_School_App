@@ -28,15 +28,11 @@ struct Music: Codable {
     
 }
 
-enum ArtistName: String, Codable {
-    case frankOcean = "Frank Ocean"
-}
-
 
 func getMethod(completionHandler: @escaping ([Music]?) -> Void) {
     
     // URL구조체 만들기
-    guard let url = URL(string: "https://itunes.apple.com/search?term=frank+ocean&media=music") else {
+    guard let url = URL(string: "https://itunes.apple.com/search?term=frankocean&media=music") else {
         print("Error: cannot create URL")
         completionHandler(nil)
         return
