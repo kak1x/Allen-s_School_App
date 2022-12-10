@@ -11,6 +11,9 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var musicTableView: UITableView!
     
+    // 🍏 서치 컨트롤러 생성 ===> 네비게이션 아이템에 할당
+    let searchController = UISearchController()
+    
     // 네트워크 매니저 (싱글톤)
     var networkManager = NetworkManager.shared
     
@@ -22,6 +25,15 @@ class ViewController: UIViewController {
         
         setupTableView()
         setupDatas()
+        setupSearchBar()
+    }
+    
+    // 서치바 세팅
+    func setupSearchBar() {
+        self.title = "Music Search"
+        navigationItem.searchController = searchController
+        // 🍏 1) (단순)서치바의 사용
+        searchController.searchBar.delegate = self
     }
     
     // 테이블뷰 세팅
@@ -86,4 +98,47 @@ extension ViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
     
+}
+
+//MARK: - 🍏 (단순) 서치바 확장
+extension ViewController: UISearchBarDelegate {
+    
+    // 선택 1) 유저가 글자를 입력하는 순간마다 호출되는 메서드
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        // 다시 빈 배열로 만들기
+//        self.musicArrays = []
+//
+//        // 네트워킹 시작
+//        networkManager.fetchMusic(searchTerm: searchText) { result in
+//            switch result {
+//            case .success(let musicDatas):
+//                self.musicArrays = musicDatas
+//                DispatchQueue.main.async {
+//                    self.musicTableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+    
+    // 선택 2) 검색(Search) 버튼을 눌렀을때 호출되는 메서드
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchController.searchBar.text else { return }
+        // 다시 빈 배열로 만들기
+        self.musicArrays = []
+        // 네트워킹 시작
+        networkManager.fetchMusic(searchTerm: text) { result in
+            switch result {
+            case .success(let musicDatas):
+                self.musicArrays = musicDatas
+                DispatchQueue.main.async {
+                    self.musicTableView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        self.view.endEditing(true)
+    }
 }
